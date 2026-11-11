@@ -47,10 +47,12 @@ python3 -m http.server 8766 --directory site
 - `description`：検索結果やSNSに出る説明文。
 - `nav`：ヘッダーで強調するメニュー。`solutions` / `products` / `resources` / `about` / `moai-platform`（英語）。該当しなければ省略。
 - `noindex`：`true` にすると検索エンジンに登録させず、サイトマップにも載せません。
+- `date`：ニュース記事の公開日（`"2026-10-15"`）。入れると構造化データ NewsArticle が付きます。
 
 本文のルール:
 
 - リンクと画像のパスは `{{root}}` から書きます。例：`{{root}}about/contact-us/`、`{{root}}assets/img/foo.jpg`。内部リンクは末尾スラッシュ付き。`/` で始まるパスは使いません。
+- 画像は WebP で置きます（`cwebp -q 82 -resize 1600 0 元画像.png -o 名前.webp`）。`width`/`height` はビルド時に実寸が自動で入ります。
 - 外部リンクには `target="_blank" rel="noopener"` を付けます。
 - ページ内に `<h1>` は1つだけ（`.page-hero` の中）。
 - ナビゲーションとフッターの項目は `build.py` の `NAV` と `TEXT` で編集します。
@@ -107,3 +109,21 @@ python3 -m http.server 8766 --directory site
 
 `site/` を静的ホスティングに置くだけで動きます。URLは元の Google サイトと同じ構成（末尾スラッシュ付き）です。
 英語ページは元の `en.moai-lab.jp` から `/en/` 以下に移しています。
+
+## SEO
+
+ビルド時に自動で入るもの:
+
+- `<title>`・description・canonical・OGP・Twitterカード（画像は `src/assets/img/og-image.jpg`、1200×630）
+- 日本語と英語で対になるページの hreflang（`build.py` の `ALTERNATES`）
+- 構造化データ：全ページに会社情報（Organization）とパンくず（BreadcrumbList、`ol.crumbs` から生成）、トップに WebSite、`date` のあるページに NewsArticle。会社情報は `build.py` の `ORG` で編集します。
+- `sitemap.xml`（日本語URLはパーセントエンコード）と `robots.txt`
+- `404.html`（`src/pages/404.html` から生成。検索エンジンには登録させない）
+
+`src/static/` のファイルはサイト直下にそのままコピーされます（Google Search Console の確認ファイルなど）。
+
+`vercel.json` で次の転送を設定しています。いずれも Vercel 側でそのドメインをこのプロジェクトに追加したときに効きます。
+
+- `en.moai-lab.jp/...` → `www.moai-lab.jp/en/...`（`/home` は `/en/`）
+- `moai-lab.jp/...` → `www.moai-lab.jp/...`
+- `/home` → `/`（Google サイト時代のURL）。末尾スラッシュなしの旧URLは `trailingSlash` で付きの形に転送されます。

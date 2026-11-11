@@ -2,6 +2,43 @@
   "outputDirectory": "site",
   "trailingSlash": true,
   "redirects": [
-    { "source": "/home", "destination": "/", "permanent": true }
+    {
+      "source": "/home",
+      "has": [
+        {
+          "type": "host",
+          "value": "en.moai-lab.jp"
+        }
+      ],
+      "destination": "https://www.moai-lab.jp/en/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "en.moai-lab.jp"
+        }
+      ],
+      "destination": "https://www.moai-lab.jp/en/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "moai-lab.jp"
+        }
+      ],
+      "destination": "https://www.moai-lab.jp/$1",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }

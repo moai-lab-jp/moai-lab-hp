@@ -25,6 +25,7 @@ import shutil
 import subprocess
 import sys
 from datetime import date
+from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "src")
@@ -33,7 +34,28 @@ OUT = os.path.join(HERE, "site")
 
 BASE_URL = "https://www.moai-lab.jp"
 SITE_NAME = {"ja": "MOAI Lab", "en": "MOAI Lab"}
-OG_IMAGE = "assets/img/og-image.png"  # src/assets/img/ に置けば自動で使われる
+OG_IMAGE = "assets/img/og-image.jpg"  # SNS共有用（1200×630）。src/assets/img/ に置けば自動で使われる
+
+# 会社情報（トップページの構造化データ Organization に入る）
+ORG = {
+    "@type": "Organization",
+    "@id": BASE_URL + "/#org",
+    "name": "株式会社MOAI Lab",
+    "legalName": "株式会社MOAI Lab",
+    "alternateName": "MOAI Lab Inc.",
+    "url": BASE_URL + "/",
+    "logo": BASE_URL + "/assets/img/moai-logo.png",
+    "foundingDate": "2024-11-29",
+    "address": {
+        "@type": "PostalAddress",
+        "postalCode": "135-0022",
+        "addressRegion": "東京都",
+        "addressLocality": "江東区",
+        "streetAddress": "三好1-8-3 越前屋ビル 2F",
+        "addressCountry": "JP",
+    },
+    "sameAs": ["https://www.youtube.com/@MOAI_Lab", "https://note.com/moai_lab"],
+}
 
 # ---------------------------------------------------------------- ナビゲーション
 # (ラベル, リンク先) または (ラベル, [子項目...], navキー)。http で始まるものは外部リンク。
@@ -122,6 +144,86 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 
 def esc(s):
     return html.escape(s, quote=True)
+
+
+def abs_url(path):
+    """サイト内パス -> 絶対URL。日本語のパスはパーセントエンコードする（サイトマップの仕様に合わせる）。"""
+    return BASE_URL + "/" + quote(path, safe="/#")
+
+
+def image_size(path):
+    """PNG / JPEG / GIF / WebP の幅と高さを、ファイルの先頭だけ読んで返す。読めなければ None。"""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(64)
+            if head[:8] == b"\x89PNG\r\n\x1a\n":
+                return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+            if head[:6] in (b"GIF87a", b"GIF89a"):
+                return int.from_bytes(head[6:8], "little"), int.from_bytes(head[8:10], "little")
+            if head[:4] == b"RIFF" and head[8:12] == b"WEBP":
+                kind = head[12:16]
+                if kind == b"VP8X":
+                    return 1 + int.from_bytes(head[24:27], "little"), 1 + int.from_bytes(head[27:30], "little")
+                if kind == b"VP8 ":
+                    return int.from_bytes(head[26:28], "little") & 0x3FFF, int.from_bytes(head[28:30], "little") & 0x3FFF
+                if kind == b"VP8L":
+                    b = int.from_bytes(head[21:25], "little")
+                    return (b & 0x3FFF) + 1, ((b >> 14) & 0x3FFF) + 1
+            if head[:2] == b"\xff\xd8":
+                f.seek(2)
+                while True:
+                    marker = f.read(2)
+                    if len(marker) < 2 or marker[0] != 0xFF:
+                        return None
+                    if marker[1] in (0xD8, 0x01) or 0xD0 <= marker[1] <= 0xD7:
+                        continue
+                    length = int.from_bytes(f.read(2), "big")
+                    if marker[1] in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                        data = f.read(5)
+                        return int.from_bytes(data[3:5], "big"), int.from_bytes(data[1:3], "big")
+                    f.seek(length - 2, 1)
+    except OSError:
+        pass
+    return None
+
+
+def add_image_sizes(body, out_dir):
+    """width/height のない <img> に実寸を書き込む（レイアウトのずれ＝CLSを防ぐ）。"""
+    def fix(m):
+        tag = m.group(0)
+        if " width=" in tag or " height=" in tag:
+            return tag
+        src = re.search(r'src="([^"]+)"', tag)
+        if not src or is_ext(src.group(1)):
+            return tag
+        size = image_size(os.path.normpath(os.path.join(out_dir, src.group(1))))
+        if not size:
+            return tag
+        return tag[:4] + f' width="{size[0]}" height="{size[1]}"' + tag[4:]
+    return re.sub(r"<img\b[^>]*>", fix, body)
+
+
+def plain(s):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", s))).strip()
+
+
+def breadcrumbs_ld(body, url):
+    """本文の <ol class="crumbs"> から BreadcrumbList を作る。"""
+    m = re.search(r'<ol class="crumbs">(.*?)</ol>', body, re.S)
+    if not m:
+        return None
+    lis = re.findall(r"<li>(.*?)</li>", m.group(1), re.S)
+    items = []
+    for i, li in enumerate(lis):
+        a = re.search(r'href="([^"]*)"', li)
+        if a:
+            target = abs_url(a.group(1).replace("{{root}}", ""))
+        elif i == len(lis) - 1:
+            target = abs_url(url)
+        else:
+            continue  # リンク先のない中間の項目（一覧ページがないもの）は載せない
+        items.append({"@type": "ListItem", "position": len(items) + 1, "name": plain(li), "item": target})
+    return {"@type": "BreadcrumbList", "itemListElement": items} if len(items) > 1 else None
 
 
 def is_ext(href):
@@ -224,12 +326,15 @@ def render(url, meta, body, has_og):
     lang = "en" if url == "en/" or url.startswith("en/") else "ja"
     t = TEXT[lang]
     depth = url.count("/")
-    root = "../" * depth
+    # 404ページはどのURLでも表示されるので、リンクはルートからの絶対パスにする
+    root = "/" if meta.get("is404") else "../" * depth
     is_home = url in ("", "en/")
     title = meta["title"] if is_home else f'{meta["title"]} | {SITE_NAME[lang]}'
     desc = meta.get("description", "")
-    canonical = f"{BASE_URL}/{url}"
+    canonical = abs_url(url)
+    crumbs = breadcrumbs_ld(body, url)
     body = body.replace("{{root}}", root)
+    body = add_image_sizes(body, os.path.join(OUT, url))
 
     alt = ""
     pairs = {**ALTERNATES, **{v: k for k, v in ALTERNATES.items()}}
@@ -241,18 +346,37 @@ def render(url, meta, body, has_og):
     lang_href = pairs.get(url, t["lang_href"])
 
     og_img = (f'\n  <meta property="og:image" content="{BASE_URL}/{OG_IMAGE}">'
+              '\n  <meta property="og:image:width" content="1200">'
+              '\n  <meta property="og:image:height" content="630">'
+              f'\n  <meta property="og:image:alt" content="{esc(SITE_NAME[lang])}">'
               f'\n  <meta name="twitter:image" content="{BASE_URL}/{OG_IMAGE}">') if has_og else ""
-    ld = ""
+    graph = []
     if is_home:
-        ld = '\n  <script type="application/ld+json">' + json.dumps({
-            "@context": "https://schema.org", "@graph": [
-                {"@type": "Organization", "@id": BASE_URL + "/#org", "name": "株式会社MOAI Lab",
-                 "alternateName": "MOAI Lab Inc.", "url": BASE_URL + "/",
-                 "logo": BASE_URL + "/assets/img/moai-logo.png",
-                 "sameAs": ["https://www.youtube.com/@MOAI_Lab", "https://note.com/moai_lab"]},
-                {"@type": "WebSite", "@id": BASE_URL + "/#website", "url": BASE_URL + "/",
-                 "name": "MOAI Lab", "inLanguage": lang, "publisher": {"@id": BASE_URL + "/#org"}},
-            ]}, ensure_ascii=False) + "</script>"
+        graph += [ORG, {"@type": "WebSite", "@id": f"{BASE_URL}/{url}#website", "url": canonical,
+                        "name": "MOAI Lab", "inLanguage": lang, "publisher": {"@id": ORG["@id"]}}]
+    if crumbs:
+        graph.append(crumbs)
+    if meta.get("date"):
+        h1 = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
+        article = {"@type": "NewsArticle", "headline": plain(h1.group(1))[:110] if h1 else meta["title"],
+                   "datePublished": meta["date"], "dateModified": meta.get("modified", meta["date"]),
+                   "inLanguage": lang, "mainEntityOfPage": canonical,
+                   "author": {"@type": "Organization", "name": ORG["name"], "url": ORG["url"]},
+                   "publisher": {"@id": ORG["@id"], "@type": "Organization", "name": ORG["name"],
+                                 "logo": {"@type": "ImageObject", "url": ORG["logo"]}}}
+        first_img = re.search(r'<img[^>]*src="([^"]+)"', body)
+        if first_img:
+            article["image"] = abs_url(os.path.normpath(os.path.join(url, first_img.group(1))).lstrip("./"))
+        elif has_og:
+            article["image"] = f"{BASE_URL}/{OG_IMAGE}"
+        graph.append(article)
+    ld = ""
+    if graph:
+        if not is_home and ORG not in graph:
+            graph.append({k: ORG[k] for k in ("@type", "@id", "name", "url", "logo")})
+        ld = ('\n  <script type="application/ld+json">'
+              + json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
+              + "</script>")
     robots = "noindex, follow" if meta.get("noindex") else "index, follow, max-image-preview:large"
 
     return f"""<!DOCTYPE html>
@@ -263,7 +387,7 @@ def render(url, meta, body, has_og):
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(desc)}">
   <meta name="robots" content="{robots}">
-  <link rel="canonical" href="{canonical}">{alt}
+  {'' if meta.get('is404') else f'<link rel="canonical" href="{canonical}">'}{alt}
   <meta property="og:type" content="{'website' if is_home else 'article'}">
   <meta property="og:site_name" content="{SITE_NAME[lang]}">
   <meta property="og:locale" content="{'ja_JP' if lang == 'ja' else 'en_US'}">
@@ -343,6 +467,12 @@ def main():
             src = os.path.join(dirpath, name)
             url = page_url(os.path.relpath(src, PAGES))
             meta, body = read_fragment(src)
+            if name == "404.html" and dirpath == PAGES:
+                # Vercel などはサイト直下の 404.html を「見つからない」ページとして返す
+                meta.update(is404=True, noindex=True)
+                with open(os.path.join(OUT, "404.html"), "w", encoding="utf-8") as f:
+                    f.write(render("404/", meta, body, has_og))
+                continue
             out_path = os.path.join(OUT, url, "index.html")
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
             with open(out_path, "w", encoding="utf-8") as f:
@@ -355,7 +485,7 @@ def main():
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         for url, mod in sitemap:
-            f.write(f"  <url><loc>{esc(BASE_URL + '/' + url)}</loc><lastmod>{mod}</lastmod></url>\n")
+            f.write(f"  <url><loc>{esc(abs_url(url))}</loc><lastmod>{mod}</lastmod></url>\n")
         f.write("</urlset>\n")
     with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"User-agent: *\nAllow: /\n\nSitemap: {BASE_URL}/sitemap.xml\n")
