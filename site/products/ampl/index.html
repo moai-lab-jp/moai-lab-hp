@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMPL | MOAI Lab</title>
+  <meta name="description" content="数理最適化モデリング言語AMPLの概要です。主な特徴、実務で効く強み、対応する商用・オープンソースの最適化ソルバー、AIを用いた自動コーディング、関連セミナー、マニュアル、無料トライアルをご案内します。当社はAMPLの日本国内総販売代理店です。">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.moai-lab.jp/products/ampl/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="MOAI Lab">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:url" content="https://www.moai-lab.jp/products/ampl/">
+  <meta property="og:title" content="AMPL | MOAI Lab">
+  <meta property="og:description" content="数理最適化モデリング言語AMPLの概要です。主な特徴、実務で効く強み、対応する商用・オープンソースの最適化ソルバー、AIを用いた自動コーディング、関連セミナー、マニュアル、無料トライアルをご案内します。当社はAMPLの日本国内総販売代理店です。">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="../../assets/img/moai-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="../../" aria-label="MOAI Lab">
+        <img src="../../assets/img/moai-logo.png" alt="" width="39" height="34">
+        <span class="mark">MOAI Lab</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="メニュー">
+        <a href="../../">Home</a>
+        <div class="nav-item"><button type="button" aria-expanded="false">Solutions</button><div class="nav-drop"><a href="../../solutions/">ソリューション一覧</a><a href="../../solutions/supply-chain-design-solution/">Supply Chain最適化</a><a href="../../solutions/forecasting-inventory-solution/">需要予測と在庫最適化</a><a href="../../solutions/manufacturing-solution/">生産／製造最適化</a><a href="../../solutions/distribution-solution/">輸送／配送最適化</a><a href="../../solutions/workforce-planning-solution/">人員配置最適化</a><a href="../../solutions/energy-solution/">エネルギー最適化</a><a href="../../solutions/humanitarian_logistics/">防災計画最適化</a></div></div>
+        <div class="nav-item current"><button type="button" aria-expanded="false">Products</button><div class="nav-drop"><a href="../../products/moai-platform/">MOAI Platform</a><a href="https://saas.moai-lab.jp/" target="_blank" rel="noopener">MOAI SaaS</a><a href="https://agi.moai-lab.jp/" target="_blank" rel="noopener">AGI4OPT</a><a href="../../products/ampl/" aria-current="page">AMPL</a></div></div>
+        <a href="../../seminar/">セミナー</a>
+        <a href="../../demo/">デモ</a>
+        <div class="nav-item"><button type="button" aria-expanded="false">Resources</button><div class="nav-drop"><a href="../../resources/news/">News</a><a href="../../resources/technology-intro/">技術紹介</a><a href="../../resources/blog/">ブログ</a><a href="../../resources/faqs/">FAQs</a></div></div>
+        <div class="nav-item"><button type="button" aria-expanded="false">About</button><div class="nav-drop"><a href="../../about/about-us/">企業情報</a><a href="../../about/contact-us/">お問い合わせ</a><a href="../../about/service_pamphlet_download/">資料ダウンロード</a><a href="../../about/eula/">商品・サービス利用規約</a></div></div>
+        <a class="lang" href="../../en/" lang="en">English</a>
+      </nav>
+      <a class="btn sm head-cta" href="../../about/contact-us/">お問い合わせ</a>
+    </div>
+  </header>
+  <main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <ol class="crumbs"><li><a href="../../">Home</a></li><li>Products</li><li>AMPL</li></ol>
+    <h1>数理最適化モデリング言語 AMPLの概要</h1>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="prose wide fade-in">
+      <p>数理最適化モデリング言語 <strong>AMPL（A Mathematical Programming Language）</strong> は、数理最適化モデルを記述するための高水準モデリング言語です。</p>
+      <p>開発元のAMPL Optimization社によれば、利用組織は<strong>50か国</strong>以上に及び、UPS、Siemens、Rio Tinto、U.S. ARMY、LinkedIn、ENGIE、O'Shaughnessy Asset Managementなど、<strong>物流、製造、資源、エネルギー、IT、金融、政府機関と幅広い分野で採用</strong>されています。同社は、AMPLで構築された最適化モデルが影響を与えた収益を2,000億ドル以上（約30兆円）、AMPLベースのシステムによる運用コスト削減額を5億ドル以上（約750億円）としています。※ 1ドル150円で換算。</p>
+      <p>当社は、AMPL の「日本国内総販売代理店」として、AMPLや各種最適化ソルバーの販売・導入支援・技術サポートを一括してご提供しております。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="features">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>AMPLの主な特徴</h2>
+    </div>
+    <div class="grid cols-3">
+      <div class="card fade-in">
+        <h3>数式をそのままコードに</h3>
+        <p>変数・パラメータ・集合・目的関数・制約条件といったモデルの構成要素を自然な数式表記に近い形で表現できます。複雑なモデルも短く、読みやすく記述できます。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>幅広い問題クラスに対応</h3>
+        <p>線形・整数・非線形最適化など多様な最適化問題を、直感的かつ効率的に表現でき、ソルバー非依存の設計により、問題規模や性能要件、コストに応じた柔軟な運用が可能です。</p>
+        <p>バックエンドの最適化ソルバーとしては、Gurobi、CPLEX、Xpress などの商用ソルバーから、CBC、HiGHS などのオープンソースソルバーまで幅広く対応しています。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>モデル、データ、ソルバーの分離</h3>
+        <p>最適化モデル構造 （変数、目的関数、制約条件）と数値データ（係数、上下限など）を分離管理する設計により、モデルの再利用性が高く、大規模データにも容易に対応できます。</p>
+        <p>また、特定ソルバーの構文に縛られません。一度モデルを書けば、線形計画・混合整数計画・非線形計画など問題タイプや予算に応じて、商用ソルバーとオープンソースソルバーを自由に選択・切り替えできます。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>大規模ほど差が出る</h3>
+        <p>AMPLの処理系はC言語で実装されており、Pythonベースのモデリングと比べてモデル生成が圧倒的に高速です。大規模問題ではこの差が効いてきます。加えて前処理（presolve）機能が非常に強力で、ソルバー単体で実行するより速く難問が解けるケースがあります。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>AIと相性が良い</h3>
+        <p>長年世界中で使われてきた結果、大規模言語モデルの学習データには大量のAMPLコードが含まれています。そのため、AIが得意とするプログラミング言語の一つになっています。AMPLは機能が豊富なぶんハルシネーションへの備えは必要ですが、適切なガードレールを設ければ、自然言語による問題説明からのAMPLコード生成は容易です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="strengths">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>実務で効く3つの強み</h2>
+    </div>
+    <div class="grid cols-3">
+      <div class="card accent fade-in">
+        <h3>高い安定性と信頼性</h3>
+        <p>AMPLは1985年、ベル研究所のRobert Fourer、David M. Gay、そして『プログラミング言語C』の共著者として知られるBrian W. Kernighanによって開発されました。以来40年にわたり、世界中の企業・政府機関・研究機関で使われ続けています。長い実績と技術的蓄積に裏打ちされた安定性は、失敗の許されない実ビジネスの現場でこそ価値を発揮します。</p>
+      </div>
+      <div class="card accent fade-in">
+        <h3>組み込みは自由自在</h3>
+        <p>Python、R、C#、C++、Java、MATLAB、Cの公式APIが全ライセンスに無償で付属し、既存システムの中からモデルの生成・更新・求解を制御できます。pandasや業務データベース、Colab・VS Code、AWS/Azure/GCP、Streamlitまで、実務の流れを止めずに最適化を導入できます。<a href="https://ampl.com/products/ampl/integrations/#programming-languages-apis" target="_blank" rel="noopener">詳細</a></p>
+      </div>
+      <div class="card accent fade-in">
+        <h3>想定外の変化に強い</h3>
+        <p>最初は線形だと思っていたモデルに非線形項や整数変数が必要になる。扱う問題例が想定より大規模になる。最適化プロジェクトでは日常的に起こることです。AMPLなら、無料ソルバーから商用ソルバーへ気軽に移行でき、逆に開発は商用ソルバーで時短し、運用は無料ソルバーで回すという選択も可能です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="commercial-solvers">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>商用最適化ソルバー</h2>
+      <p class="lead">当社では、商用ソルバーとして Gurobi、CPLEX、Xpress、COPT、Knitro、CONOPT、MINOS、SNOPT、Baronを取り扱っております。その他の商用ソルバーをご希望の場合はお問い合わせください。</p>
+    </div>
+    <div class="grid cols-4">
+      <div class="card fade-in">
+        <h3>Gurobi Optimizer</h3>
+        <p>線形最適化（LP）、混合整数最適化（MIP）、および二次最適化（QP）に対応する業界屈指のソルバーで、その卓越した高速性、ロバスト性、スケーラビリティで知られています。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>IBM ILOG CPLEX</h3>
+        <p>大規模な線形最適化および混合整数最適化問題を高性能に解くソルバーで、ロバストなアルゴリズムが特長です。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>FICO Xpress</h3>
+        <p>複雑な線形および混合整数モデル向けの先進的ソルバーで、高い性能と柔軟性を提供します。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>COPT</h3>
+        <p>線形・整数最適化問題に対応する競争力のあるソルバーで、速度とスケーラビリティ、最新のアルゴリズム革新に最適化されています。</p>
+      </div>
+    </div>
+    <div class="grid cols-3">
+      <div class="card fade-in">
+        <h3>Artelys Knitro</h3>
+        <p>先進的アルゴリズムを備えた大規模最適化向けの非線形ソルバーです。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>CONOPT</h3>
+        <p>スムーズな非線形問題に適したソルバーで、工学や経済分野で広く使われています。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>SNOPT</h3>
+        <p>航空宇宙や工学分野に特に適した、疎な大規模非線形モデル向けに最適化されたソルバーです。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>MINOS</h3>
+        <p>制約付き非線形最適化問題に対して信頼性の高いソルバーで、エネルギーや物流分野でよく用いられています。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>Baron</h3>
+        <p>非凸問題に対してグローバル最適性を保証する強力なグローバル最適化ソルバーです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="open-source-solvers">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>オープンソース最適化ソルバー</h2>
+    </div>
+    <div class="grid cols-2">
+      <div class="card fade-in">
+        <h3>CBC</h3>
+        <p>COIN Branch and Cut（CBC）は、C++で書かれたオープンソースの混合整数線形最適化（MILP）ソルバーです。カスタムの分枝カット法ソルバーを構築するためのライブラリとして利用でき、単体の実行ファイルとしても使えます。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>HiGHS</h3>
+        <p>HiGHSは、線形最適化（LP）・混合整数最適化（MIP）・凸二次最適化（QP）に対応するオープンソースソルバーです。C++で開発され、MITライセンスのもとで公開されています。C、Python、Julia、Rust、JavaScript、Fortran、C# など、複数の言語インターフェースを備えています。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>IPOPT</h3>
+        <p>IPOPTは、大規模非線形最適化のオープンソースソルバーです。滑らかな制約を持つ連続最適化問題を対象とし、変数・制約が数万規模に及ぶモデルでも安定して解を求められます。</p>
+      </div>
+      <div class="card fade-in">
+        <h3>Bonmin</h3>
+        <p>Bonminは、混合整数非線形最適化（MINLP）のオープンソースソルバーです。分枝限定法と内点法を組み合わせることで、離散変数と連続変数が混在するモデルを効率的に処理します。</p>
+      </div>
+    </div>
+    <div class="prose wide fade-in">
+      <p>このほか、オープンソースソルバーであるSCIP、GCG、Couenne、NVIDIA cuOptなどとも連携可能です。</p>
+      <p>掲載内容は予告なく変更される場合があります。最新情報は下記の公式サイトにてご確認ください。</p>
+      <p><a href="https://dev.ampl.com/solvers/index.html" target="_blank" rel="noopener">https://dev.ampl.com/solvers/index.html</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="solver-problems">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>各ソルバーの対応可能な問題</h2>
+    </div>
+    <div class="grid cols-2">
+      <figure class="figure fade-in">
+        <img src="../../assets/img/products-ampl-7bc6d73f.png" alt="各ソルバーが対応する問題クラスの一覧表（LP、MILP、QP、MIQP、QCP、Conic、NLP）" loading="lazy">
+      </figure>
+      <figure class="figure fade-in">
+        <img src="../../assets/img/products-ampl-fb603d72.png" alt="非線形ソルバーが対応する問題クラスの一覧表（NLP、MINLP、Global、MP）" loading="lazy">
+      </figure>
+    </div>
+    <div class="prose wide fade-in">
+      <p>掲載内容は予告なく変更される場合があります。最新情報は下記の公式サイトにてご確認ください。</p>
+      <p><a href="https://dev.ampl.com/solvers/index.html" target="_blank" rel="noopener">https://dev.ampl.com/solvers/index.html</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ai-coding">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>AIを用いたAMPL自動コーディング</h2>
+      <p class="lead">Google Gemini（Gem）を活用して AMPLモデルの自動生成をサポートするアプリを公開しました。</p>
+      <p class="lead">数理最適化の専門知識がなくても、自然言語で要件を入力するだけで、AMPLコードを自動的に生成できます。</p>
+    </div>
+    <div class="prose wide fade-in">
+      <h3>特徴</h3>
+    </div>
+    <div class="grid cols-3 mt-s">
+      <div class="card fade-in">
+        <p class="kicker"><strong>開発時間の大幅短縮</strong></p>
+        <ul>
+          <li>自然言語で解きたい問題文を入力するだけで、AMPLコードが自動生成されます。</li>
+          <li>手作業でモデルを組む場合に比べ、開発時間を大幅に短縮できます。</li>
+        </ul>
+      </div>
+      <div class="card fade-in">
+        <p class="kicker"><strong>専門知識が不要</strong></p>
+        <ul>
+          <li>高度なAMPLや数理最適化の知識がなくても利用可能です。</li>
+          <li>AMPLのモデルを自動で生成可能で、生成されたAMPLコードはダウンロード可能</li>
+        </ul>
+      </div>
+      <div class="card fade-in">
+        <p class="kicker"><strong>無料で利用可能</strong></p>
+        <ul>
+          <li>アカデミック、商用問わず無料でご利用いただけます。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prose wide fade-in">
+      <h3>使い方</h3>
+      <p>手順１：問題文をテキストまたはマークダウンで入力します。</p>
+      <p>ご注意：問題文以外の文章は入力しないでください。</p>
+      <p>手順２：送信ボタンを押すと自動でAMPL定式化コードが生成されます。Canvasを押すとコードが画面の右側に表示されます。</p>
+      <p>ご注意：生成されたコードの部分修正指示はできません。</p>
+      <p>入力例</p>
+      <figure class="figure plain">
+        <img src="../../assets/img/products-ampl-9d94a82a.png" alt="AMPL自動コーディングの入力例" loading="lazy">
+      </figure>
+      <p>出力例</p>
+      <figure class="figure plain">
+        <img src="../../assets/img/products-ampl-38c38be5.png" alt="AMPL自動コーディングの出力例（1）" loading="lazy">
+      </figure>
+      <figure class="figure plain">
+        <img src="../../assets/img/products-ampl-d13457e5.png" alt="AMPL自動コーディングの出力例（2）" loading="lazy">
+      </figure>
+    </div>
+    <div class="actions mt-m">
+      <a class="btn" href="https://gemini.google.com/gem/18r2MQYiAc4K1c0nZwC-m4tX2i8CdD6PP?usp=sharing" target="_blank" rel="noopener">AMPL自動コーディング用Google Gemini Gem （無料）</a>
+    </div>
+    <div class="prose mt-l fade-in">
+      <p>Google Gemini Gemを用いたAMPL自動コーディング解説動画</p>
+      <div class="video"><iframe src="https://www.youtube.com/embed/Owyx79d1Xqo" title="Google Gemini Gemを用いたAMPL自動コーディング解説動画" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="seminar">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>AMPL関連セミナー</h2>
+    </div>
+    <div class="prose fade-in">
+      <div class="video"><iframe src="https://www.youtube.com/embed/8hO-QA6hTog" title="最適化ソリューション開発を加速する数理最適化モデリングツールAMPL活用セミナー" allowfullscreen loading="lazy"></iframe></div>
+      <p><a href="https://drive.google.com/file/d/1LaskyVI9Cm-SDQdAEhT63hSHqIRO9mjb/view?usp=drive_link" target="_blank" rel="noopener">最適化ソリューション開発を加速する数理最適化モデリングツールAMPL活用セミナー.pdf</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="resources">
+  <div class="wrap">
+    <div class="grid cols-2">
+      <div class="prose fade-in">
+        <h2>関連資料</h2>
+        <p>書籍（AMPL基礎）：<a href="../../resources/news/ampl数理計画のためのモデリング言語/">『AMPL: 数理計画のためのモデリング言語』</a> <a href="https://www.amazon.co.jp/dp/B0HJMWWZ88" target="_blank" rel="noopener">AMAZONリンク</a></p>
+        <p><a href="https://note.com/moai_lab/n/ne58d2176ba3d" target="_blank" rel="noopener">数理最適化モデリングツールAMPL、Pyomo、JuMP、GAMSは何が違うのか ─ 論文のデータで比較</a></p>
+      </div>
+      <div class="prose fade-in">
+        <h2>マニュアル</h2>
+        <p><a href="https://drive.google.com/file/d/1iQV4CAT7NMGuYB_4zmLAnpyK2_c29VgV/view?usp=sharing" target="_blank" rel="noopener"><strong>AMPL利用ガイドリンク</strong></a></p>
+        <p><a href="https://scmopt.github.io/ampl/" target="_blank" rel="noopener"><strong>AMPLの日本語のマニュアルリンク</strong></a></p>
+        <p><a href="https://portal.ampl.com/account/MOAI/" target="_blank" rel="noopener"><strong>AMPLポータル（日本国内専用）リンク</strong></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="trial">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>無料トライアル</h2>
+    </div>
+    <div class="split wide-text top fade-in">
+      <div class="prose">
+        <ul>
+          <li>AMPLおよび各種ソルバーの商用版の無料トライアル（１ヶ月）をご用意しておりますので、ぜひお試しください。ライセンス発行は、以下のお問い合わせフォームより受け付けております。</li>
+          <li>変数制限ありの無償デモ版は<a href="https://portal.ampl.com/account/MOAI/" target="_blank" rel="noopener"><strong>AMPLポータル（日本国内専用）</strong></a>よりダウンロードすることが可能です。</li>
+          <li>他にアカデミック版の提供も行っております。ライセンス詳細は<a href="https://drive.google.com/file/d/1iQV4CAT7NMGuYB_4zmLAnpyK2_c29VgV/view?usp=sharing" target="_blank" rel="noopener"><strong>AMPL利用ガイド</strong></a>をご確認ください。</li>
+        </ul>
+        <p class="note">*日本国内からのAMPLおよび最適化ソルバーのライセンスに関するお問い合わせ、ライセンス発行、購入等は、総代理店である当社にて対応しております。</p>
+        <p class="note">ただし、AMPL Community Edition（商用利用不可）及び無償版アカデミックライセンスについては、<a href="https://ampl.com/" target="_blank" rel="noopener">AMPL米国本社</a>のポータルからのみライセンスが発行されます。ご利用の際は<a href="https://ampl.com/" target="_blank" rel="noopener">AMPL米国本社</a>のサイトから直接ライセンスを取得してください。</p>
+        <p class="note">*各種無償版ライセンスは動的認証を行っているため、ネットワークが接続されている環境でのみご利用可能です。</p>
+        <p class="note">*「AMPL利用規約およびエンドユーザライセンス契約」には、AMPLと連携可能な各種商用ソルバー（Gurobi、CPLEX、Xpress 等）に関する使用条件も含まれます。</p>
+        <p class="note">*商品やサービスをご利用いただくことにより、お客様は、最新の利用規約の内容に同意されたものとみなされます。</p>
+        <p><a href="https://drive.google.com/file/d/1oDyojR8PbdaCEZPGIN9B8xlubXABlkgl/view?usp=drive_link" target="_blank" rel="noopener">AMPL 利用規約およびエンドユーザーライセンス契約</a></p>
+      </div>
+      <div class="video"><iframe src="https://www.youtube.com/embed/zO1PYsnUqgs" title="AMPLの紹介動画" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+    <div class="actions center mt-l">
+      <a class="btn" href="../../about/contact-us/">無料トライアル・相談・価格問い合わせ</a>
+      <a class="btn ghost" href="https://portal.ampl.com/account/MOAI/" target="_blank" rel="noopener">AMPLポータル（日本国内専用）</a>
+    </div>
+  </div>
+</section>
+  </main>
+  <footer class="site-foot">
+    <div class="foot-cta"><div class="wrap"><div class="grid cols-3"><div class="card"><h3>無料相談</h3><p>モジュールやスキルなどの個別機能から、完成品のSaaSまで、クラウド、API連携、オンプレミスに柔軟に対応。企業規模や導入目的に応じた最適なプランをご提案します。</p><a class="btn sm" href="../../about/contact-us/">無料相談</a></div><div class="card"><h3>メーリングリスト</h3><p>MOAI Labの最適化に関するブログ、イベント、商品の最新情報をお送りさせていただきます。</p><a class="btn sm" href="../../about/mailinglist/">メーリングリスト登録</a></div><div class="card"><h3>資料ダウンロード</h3><p>商品・サービス紹介資料をダウンロードいただけます。</p><a class="btn sm" href="../../about/service_pamphlet_download/">資料ダウンロード</a></div></div></div></div>
+    <div class="wrap foot-main">
+      <div class="foot-brand">
+        <a class="brand" href="../../"><img src="../../assets/img/moai-logo.png" alt="" width="39" height="34"><span class="mark">MOAI Lab</span></a>
+        <p>数理最適化（MO）とAIを融合した「MOAI Technology」で、ビジネスの意思決定を最適化します。</p>
+      </div>
+      <div><h2>Solutions</h2><ul><li><a href="../../solutions/">ソリューション一覧</a></li><li><a href="../../solutions/supply-chain-design-solution/">Supply Chain最適化</a></li><li><a href="../../solutions/forecasting-inventory-solution/">需要予測と在庫最適化</a></li><li><a href="../../solutions/manufacturing-solution/">生産／製造最適化</a></li><li><a href="../../solutions/distribution-solution/">輸送／配送最適化</a></li><li><a href="../../solutions/workforce-planning-solution/">人員配置最適化</a></li><li><a href="../../solutions/energy-solution/">エネルギー最適化</a></li><li><a href="../../solutions/humanitarian_logistics/">防災計画最適化</a></li></ul></div><div><h2>Products</h2><ul><li><a href="../../products/moai-platform/">MOAI Platform</a></li><li><a href="https://saas.moai-lab.jp/" target="_blank" rel="noopener">MOAI SaaS</a></li><li><a href="https://agi.moai-lab.jp/" target="_blank" rel="noopener">AGI4OPT</a></li><li><a href="../../products/ampl/">AMPL</a></li></ul></div><div><h2>Resources</h2><ul><li><a href="../../resources/news/">News</a></li><li><a href="../../resources/technology-intro/">技術紹介</a></li><li><a href="../../resources/blog/">ブログ</a></li><li><a href="../../resources/faqs/">FAQs</a></li></ul></div><div><h2>About</h2><ul><li><a href="../../about/about-us/">企業情報</a></li><li><a href="../../about/contact-us/">お問い合わせ</a></li><li><a href="../../about/service_pamphlet_download/">資料ダウンロード</a></li><li><a href="../../about/eula/">商品・サービス利用規約</a></li></ul></div><div><h2>Menu</h2><ul><li><a href="../../">Home</a></li><li><a href="../../seminar/">セミナー</a></li><li><a href="../../demo/">デモ</a></li><li><a href="../../about/mailinglist/">メーリングリスト</a></li><li><a href="../../en/">English</a></li></ul></div>
+    </div>
+    <div class="wrap foot-bottom">
+      <span>© MOAI Lab Inc. 2024-2026</span>
+      <nav aria-label="Legal"><a href="../../about/security-policy/">情報セキュリティポリシー</a><a href="../../about/privacy-policy/">プライバシーポリシー</a><a href="../../about/eula/">商品・サービス利用規約</a></nav>
+    </div>
+  </footer>
+  <script src="../../assets/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "site",
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true }
+  ]
+}

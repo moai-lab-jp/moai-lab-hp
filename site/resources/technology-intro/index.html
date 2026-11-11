@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技術紹介 | MOAI Lab</title>
+  <meta name="description" content="数理最適化と機械学習を融合した技術「MOAI」、サプライチェーン最適化モデルを統一的に表現する言語「SCML」、問題ごとに最適な手法を自動的に判別する「AutoOpt」など、MOAI Labの技術をご紹介します。">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.moai-lab.jp/resources/technology-intro/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="MOAI Lab">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:url" content="https://www.moai-lab.jp/resources/technology-intro/">
+  <meta property="og:title" content="技術紹介 | MOAI Lab">
+  <meta property="og:description" content="数理最適化と機械学習を融合した技術「MOAI」、サプライチェーン最適化モデルを統一的に表現する言語「SCML」、問題ごとに最適な手法を自動的に判別する「AutoOpt」など、MOAI Labの技術をご紹介します。">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="../../assets/img/moai-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="../../" aria-label="MOAI Lab">
+        <img src="../../assets/img/moai-logo.png" alt="" width="39" height="34">
+        <span class="mark">MOAI Lab</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="メニュー">
+        <a href="../../">Home</a>
+        <div class="nav-item"><button type="button" aria-expanded="false">Solutions</button><div class="nav-drop"><a href="../../solutions/">ソリューション一覧</a><a href="../../solutions/supply-chain-design-solution/">Supply Chain最適化</a><a href="../../solutions/forecasting-inventory-solution/">需要予測と在庫最適化</a><a href="../../solutions/manufacturing-solution/">生産／製造最適化</a><a href="../../solutions/distribution-solution/">輸送／配送最適化</a><a href="../../solutions/workforce-planning-solution/">人員配置最適化</a><a href="../../solutions/energy-solution/">エネルギー最適化</a><a href="../../solutions/humanitarian_logistics/">防災計画最適化</a></div></div>
+        <div class="nav-item"><button type="button" aria-expanded="false">Products</button><div class="nav-drop"><a href="../../products/moai-platform/">MOAI Platform</a><a href="https://saas.moai-lab.jp/" target="_blank" rel="noopener">MOAI SaaS</a><a href="https://agi.moai-lab.jp/" target="_blank" rel="noopener">AGI4OPT</a><a href="../../products/ampl/">AMPL</a></div></div>
+        <a href="../../seminar/">セミナー</a>
+        <a href="../../demo/">デモ</a>
+        <div class="nav-item current"><button type="button" aria-expanded="false">Resources</button><div class="nav-drop"><a href="../../resources/news/">News</a><a href="../../resources/technology-intro/" aria-current="page">技術紹介</a><a href="../../resources/blog/">ブログ</a><a href="../../resources/faqs/">FAQs</a></div></div>
+        <div class="nav-item"><button type="button" aria-expanded="false">About</button><div class="nav-drop"><a href="../../about/about-us/">企業情報</a><a href="../../about/contact-us/">お問い合わせ</a><a href="../../about/service_pamphlet_download/">資料ダウンロード</a><a href="../../about/eula/">商品・サービス利用規約</a></div></div>
+        <a class="lang" href="../../en/" lang="en">English</a>
+      </nav>
+      <a class="btn sm head-cta" href="../../about/contact-us/">お問い合わせ</a>
+    </div>
+  </header>
+  <main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <ol class="crumbs"><li><a href="../../">Home</a></li><li>Resources</li><li>技術紹介</li></ol>
+    <h1>MOAI（数理最適化と機械学習の融合技術）とは</h1>
+    <p class="lead">MOAIは、MO(Mathematical Optimization：数理最適化)とAI(Artificial Intelligence：人工知能、とくに機械学習)を融合した技術を指す言葉です。</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="prose fade-in">
+      <p>機械学習（広く言うと人工知能）と最適化はアナリティクス（解析的情報技術）で重要な役割を果たしてきました。機械学習は予測的アナリティクスで、最適化は指示的アナリティクスで用いられることが多いため、単に予測してから最適化をすることを「融合」と呼んでいるケースも見かけます。しかし、真の機械学習と数理最適化の融合は、より広範なものです。</p>
+      <p>私たちは、ここ数年で急速な発展を遂げたこの融合分野をMOAI (Mathematical Optimization + Artificial Intelligence) と名付け、その中で実務的に有効と考えられるものに対し、過去の研究を超える新しい技術を確立しました。これにより、従来のAIや最適化単体では実現できなかった、高速かつ実用的な意思決定が可能になっています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>SCMLとは</h2>
+      <p class="lead">SCML (Suply Chain Modeling Language) は、さまざまなサプライチェーン最適化モデルを統一的に表現するための基本言語です。</p>
+    </div>
+    <div class="prose fade-in">
+      <p>サプライチェーンは多様なシステムの複合体です。そのため、その最適化にはお客様のニーズに応じたカスタマイズが不可欠です。たとえば、ロジスティクス・ネットワーク設計（LND）で拠点の配置や輸送経路の最適化を行う際に、工場内の生産計画や輸送能力の制約などを同時に考慮しなければならない場合もあります。市販のシステムでは、これらの生産計画や輸配送最適化をLNDに組み込んでモデル化することは困難です。</p>
+      <p>そこで私たちは、サプライチェーンを共通の言語で記述できる「Supply Chain Modeling Language (SCML)」を開発しています。SCMLは、LND、生産、輸配送といったサプライチェーンの諸活動を、基本構成要素（ノード、アーク、活動、製品、モード、資源、制約、期など）を用いて記述することで、さまざまな最適化に対応できるように設計されています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <h2>本当の最適化技術とは</h2>
+    </div>
+    <div class="prose fade-in">
+      <p>最適化は、新世代アナリティクスの中核を担う技術です。しかし、本当の最適化技術を駆使できる企業は非常に限られています。漠然としたAIや特殊なコンピュータを使用した「最適化」と称される手法ではなく、真の最適化を実現するにはどうすればよいでしょうか？</p>
+      <p>私たちは、実務に有効な最適化技術を体系的に分類・整理し、問題ごとに最適な手法を実験的解析によって選定することで、お客様の抱えている問題の解決に最も適したソリューションを自動的に判別する「AutoOpt」を提案しています。</p>
+      <p>単に数理最適化ソルバー（Gurobi、CPLEX、CBCなど）にモデルを投入するだけのソリューションや、十分な専門知識をもたない方がアドホックにヒューリスティクスを作成するアプローチでは、一時的な解決策が得られたとしても、継続的に優れた結果を安定して得ることは困難です。これが、最適化技術を用いたDX（デジタルトランスフォーメーション）がうまくいかない原因のひとつです。</p>
+      <p>MOAI Labには、最適化の中核技術である数理最適化とメタヒューリスティクスの専門家が揃っており、問題に応じた最適な手法を、数理最適化、メタヒューリスティクス、そして機械学習を組み合わせて構築することが可能です。時々刻々と変化する問題例（問題に数値を入れたもの；インスタンス）に対して最適な手法を柔軟に選択することで、はじめて最適化を活用した真のDXが実現するのです。</p>
+    </div>
+  </div>
+</section>
+  </main>
+  <footer class="site-foot">
+    <div class="foot-cta"><div class="wrap"><div class="grid cols-3"><div class="card"><h3>無料相談</h3><p>モジュールやスキルなどの個別機能から、完成品のSaaSまで、クラウド、API連携、オンプレミスに柔軟に対応。企業規模や導入目的に応じた最適なプランをご提案します。</p><a class="btn sm" href="../../about/contact-us/">無料相談</a></div><div class="card"><h3>メーリングリスト</h3><p>MOAI Labの最適化に関するブログ、イベント、商品の最新情報をお送りさせていただきます。</p><a class="btn sm" href="../../about/mailinglist/">メーリングリスト登録</a></div><div class="card"><h3>資料ダウンロード</h3><p>商品・サービス紹介資料をダウンロードいただけます。</p><a class="btn sm" href="../../about/service_pamphlet_download/">資料ダウンロード</a></div></div></div></div>
+    <div class="wrap foot-main">
+      <div class="foot-brand">
+        <a class="brand" href="../../"><img src="../../assets/img/moai-logo.png" alt="" width="39" height="34"><span class="mark">MOAI Lab</span></a>
+        <p>数理最適化（MO）とAIを融合した「MOAI Technology」で、ビジネスの意思決定を最適化します。</p>
+      </div>
+      <div><h2>Solutions</h2><ul><li><a href="../../solutions/">ソリューション一覧</a></li><li><a href="../../solutions/supply-chain-design-solution/">Supply Chain最適化</a></li><li><a href="../../solutions/forecasting-inventory-solution/">需要予測と在庫最適化</a></li><li><a href="../../solutions/manufacturing-solution/">生産／製造最適化</a></li><li><a href="../../solutions/distribution-solution/">輸送／配送最適化</a></li><li><a href="../../solutions/workforce-planning-solution/">人員配置最適化</a></li><li><a href="../../solutions/energy-solution/">エネルギー最適化</a></li><li><a href="../../solutions/humanitarian_logistics/">防災計画最適化</a></li></ul></div><div><h2>Products</h2><ul><li><a href="../../products/moai-platform/">MOAI Platform</a></li><li><a href="https://saas.moai-lab.jp/" target="_blank" rel="noopener">MOAI SaaS</a></li><li><a href="https://agi.moai-lab.jp/" target="_blank" rel="noopener">AGI4OPT</a></li><li><a href="../../products/ampl/">AMPL</a></li></ul></div><div><h2>Resources</h2><ul><li><a href="../../resources/news/">News</a></li><li><a href="../../resources/technology-intro/">技術紹介</a></li><li><a href="../../resources/blog/">ブログ</a></li><li><a href="../../resources/faqs/">FAQs</a></li></ul></div><div><h2>About</h2><ul><li><a href="../../about/about-us/">企業情報</a></li><li><a href="../../about/contact-us/">お問い合わせ</a></li><li><a href="../../about/service_pamphlet_download/">資料ダウンロード</a></li><li><a href="../../about/eula/">商品・サービス利用規約</a></li></ul></div><div><h2>Menu</h2><ul><li><a href="../../">Home</a></li><li><a href="../../seminar/">セミナー</a></li><li><a href="../../demo/">デモ</a></li><li><a href="../../about/mailinglist/">メーリングリスト</a></li><li><a href="../../en/">English</a></li></ul></div>
+    </div>
+    <div class="wrap foot-bottom">
+      <span>© MOAI Lab Inc. 2024-2026</span>
+      <nav aria-label="Legal"><a href="../../about/security-policy/">情報セキュリティポリシー</a><a href="../../about/privacy-policy/">プライバシーポリシー</a><a href="../../about/eula/">商品・サービス利用規約</a></nav>
+    </div>
+  </footer>
+  <script src="../../assets/main.js" defer></script>
+</body>
+</html>
