@@ -54,8 +54,22 @@ ORG = {
         "streetAddress": "三好1-8-3 越前屋ビル 2F",
         "addressCountry": "JP",
     },
-    "sameAs": ["https://www.youtube.com/@MOAI_Lab", "https://note.com/moai_lab"],
+    "sameAs": [
+        "https://www.youtube.com/@MOAI_Lab",
+        "https://note.com/moai_lab",
+        "https://www.linkedin.com/company/moai-lab/",
+        "https://www.facebook.com/people/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE-%EF%BC%AD%EF%BC%AF%EF%BC%A1%EF%BC%A9%EF%BC%AC%EF%BD%81%EF%BD%82/61571785883755/",
+    ],
 }
+
+# フッターの SNS リンク（ラベル, URL）
+SOCIAL = [
+    ("YouTube", "https://www.youtube.com/@MOAI_Lab/featured"),
+    ("note", "https://note.com/moai_lab"),
+    ("LinkedIn", "https://www.linkedin.com/company/moai-lab/"),
+    ("X", "https://x.com/mickeykubo"),
+    ("Facebook", "https://www.facebook.com/people/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE-%EF%BC%AD%EF%BC%AF%EF%BC%A1%EF%BC%A9%EF%BC%AC%EF%BD%81%EF%BD%82/61571785883755/"),
+]
 
 # ---------------------------------------------------------------- ナビゲーション
 # (ラベル, リンク先) または (ラベル, [子項目...], navキー)。http で始まるものは外部リンク。
@@ -272,6 +286,8 @@ def render_footer(lang, root):
         singles += f'<li>{link("メーリングリスト", "about/mailinglist/", root, None)}</li>'
     singles += f'<li>{link(t["lang_label"], t["lang_href"], root, None)}</li>'
     cols.append(f"<div><h2>Menu</h2><ul>{singles}</ul></div>")
+    social = "".join(f"<li>{link(l, h, root, None)}</li>" for l, h in SOCIAL)
+    cols.append(f"<div><h2>Follow</h2><ul>{social}</ul></div>")
     legal = "".join(link(l, h, root, None) for l, h in t["foot_legal"])
     return f"""<footer class="site-foot">
     {cta}
